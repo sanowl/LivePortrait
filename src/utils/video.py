@@ -13,10 +13,11 @@ import cv2
 from rich.progress import track
 from .helper import prefix
 from .rprint import rprint as print
+from security import safe_command
 
 
 def exec_cmd(cmd):
-    subprocess.run(cmd, shell=True, check=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    safe_command.run(subprocess.run, cmd, shell=True, check=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
 
 def images2video(images, wfp, **kwargs):
