@@ -3,8 +3,8 @@ This code file mainly comes from https://github.com/dmlc/gluon-cv/blob/master/gl
 """
 import os
 import hashlib
-import requests
 from tqdm import tqdm
+from security import safe_requests
 
 
 def check_sha1(filename, sha1_hash):
@@ -68,7 +68,7 @@ def download_file(url, path=None, overwrite=False, sha1_hash=None):
             os.makedirs(dirname)
 
         print('Downloading %s from %s...' % (fname, url))
-        r = requests.get(url, stream=True)
+        r = safe_requests.get(url, stream=True)
         if r.status_code != 200:
             raise RuntimeError("Failed downloading url %s" % url)
         total_length = r.headers.get('content-length')
