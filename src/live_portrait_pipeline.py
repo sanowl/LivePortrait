@@ -10,7 +10,6 @@ Pipeline of LivePortrait
 
 import cv2
 import numpy as np
-import pickle
 import os.path as osp
 from rich.progress import track
 
@@ -26,6 +25,7 @@ from .utils.io import load_image_rgb, load_driving_info, resize_to_limit
 from .utils.helper import mkdir, basename, dct2cuda, is_video, is_template
 from .utils.rprint import rlog as log
 from .live_portrait_wrapper import LivePortraitWrapper
+import fickling
 
 
 def make_abs_path(fn):
@@ -81,7 +81,7 @@ class LivePortraitPipeline(object):
         elif is_template(args.driving_info):
             log(f"Load from video templates {args.driving_info}")
             with open(args.driving_info, 'rb') as f:
-                template_lst, driving_lmk_lst = pickle.load(f)
+                template_lst, driving_lmk_lst = fickling.load(f)
             n_frames = template_lst[0]['n_frames']
             input_eye_ratio_lst, input_lip_ratio_lst = self.live_portrait_wrapper.calc_retargeting_ratio(source_lmk, driving_lmk_lst)
         else:
