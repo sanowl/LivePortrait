@@ -16,7 +16,7 @@ from .rprint import rprint as print
 
 
 def exec_cmd(cmd):
-    subprocess.run(cmd, shell=True, check=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    subprocess.run(cmd, shell=False, check=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
 
 def images2video(images, wfp, **kwargs):
