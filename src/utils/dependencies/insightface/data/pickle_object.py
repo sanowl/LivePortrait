@@ -2,7 +2,7 @@ import cv2
 import os
 import os.path as osp
 from pathlib import Path
-import pickle
+import fickling
 
 def get_object(name):
     objects_dir = osp.join(Path(__file__).parent.absolute(), 'objects')
@@ -12,6 +12,6 @@ def get_object(name):
     if not osp.exists(filepath):
         return None
     with open(filepath, 'rb') as f:
-        obj = pickle.load(f)
+        obj = fickling.load(f)
     return obj
 
